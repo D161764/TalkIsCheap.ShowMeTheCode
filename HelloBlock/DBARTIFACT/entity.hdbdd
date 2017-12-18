@@ -1,0 +1,25 @@
+namespace HelloBlock.DBARTIFACT;
+@Schema: 'HELLOBLOCK' 
+context entity {
+   @Catalog.tableType: #COLUMN
+   Entity BlockChain{
+       key index : Integer;
+       data : LargeString;
+       commit_at : UTCTimestamp;
+       previous_hash : LargeString;
+       current_hash: LargeString;
+   };
+
+   @Catalog.tableType: #COLUMN
+   Entity BlockChainPOW{
+       key index : Integer;
+       data : LargeString;
+       commit_at : UTCTimestamp;
+       previous_hash : LargeString;
+       current_hash: LargeString;
+       nonce : Integer;
+   };
+   
+   
+};
+

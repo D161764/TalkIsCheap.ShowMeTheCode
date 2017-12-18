@@ -1,0 +1,18 @@
+PROCEDURE "HELLOBLOCK"."HelloBlock.Procedure::InsertBlock" (
+    IN block_index Integer,
+    IN block_data Nclob,
+    IN block_commit TIMESTAMP,
+    IN prevblock_hash Nclob,
+    IN Currblock_hash Nclob
+    )
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER AS
+   --DEFAULT SCHEMA <default_schema_name>
+--   READS SQL DATA AS
+BEGIN
+   /*************************************
+       Write your procedure logic 
+   *************************************/
+   INSERT INTO "HELLOBLOCK"."HelloBlock.DBARTIFACT::entity.BlockChain"("index","data","commit_at","previous_hash","current_hash") 
+   VALUES (:block_index,:block_data,:block_commit,:prevblock_hash,:Currblock_hash);
+END

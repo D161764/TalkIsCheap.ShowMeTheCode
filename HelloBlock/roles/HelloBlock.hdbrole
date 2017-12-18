@@ -1,0 +1,8 @@
+role HelloBlock.roles::HelloBlock
+{
+catalog schema "HELLOBLOCK": CREATE ANY, ALTER, DROP, EXECUTE, SELECT, INSERT, DELETE, UPDATE, INDEX, DEBUG, TRIGGER;
+
+
+application privilege: "HelloBlock.Service::HelloBlockSPMJS";
+
+}

@@ -1,0 +1,5 @@
+{
+	"privileges" : [
+		{ "name" : "HelloBlockSPMJS", "XSJS service for HelloBlock " : "HelloBlock Application privileges" }
+	]
+}
