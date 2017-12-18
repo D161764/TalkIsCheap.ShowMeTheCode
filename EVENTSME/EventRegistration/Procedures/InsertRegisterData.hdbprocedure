@@ -1,0 +1,91 @@
+PROCEDURE "EVENTSME"."EVENTSME.EventRegistration.Procedures::InsertRegisterData"(
+		IN intab "EVENTSME.DBARTIFCT::EntityAndTypes.tt_registration_event_user", 
+		OUT ex_error "EVENTSME.DBARTIFCT::EntityAndTypes.tt_exception"
+	)
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER
+AS
+BEGIN
+	DECLARE lv_user_id NVARCHAR(20);
+	DECLARE lv_event_name NVARCHAR(20);
+	DECLARE lv_fname NVARCHAR(50);
+	DECLARE lv_lname NVARCHAR(50);
+	DECLARE lv_email NVARCHAR(50);
+	DECLARE lv_company NVARCHAR(100);
+	DECLARE lv_strno NVARCHAR(20);
+	DECLARE lv_street NVARCHAR(500);
+	DECLARE lv_city NVARCHAR(50);
+	DECLARE lv_state NVARCHAR(20);
+	DECLARE lv_zip NVARCHAR(20);
+	DECLARE lv_gender NVARCHAR(10);
+	DECLARE lv_topic_abs NCLOB;
+	DECLARE lv_product NVARCHAR(50);
+	DECLARE lv_age INT;
+	DECLARE lv_off_id_proof NVARCHAR(20);
+	DECLARE lv_off_id NVARCHAR(20);
+	DECLARE lv_count INTEGER;
+
+	SELECT "user_id", 
+			"event_name", 
+			"first_name", 
+			"last_name", 
+			"email", 
+			"company", 
+			"street_no", 
+			"street", 
+			"city", 
+			"state", 
+			"postal_code", 
+			"gender", 
+			"topics_abstrat", 
+			"product_choose", 
+			"age", 
+			"official_id_proof", 
+			"official_id"
+		INTO lv_user_id, 
+			lv_event_name, 
+			lv_fname, 
+			lv_lname, 
+			lv_email, 
+			lv_company, 
+			lv_strno, 
+			lv_street, 
+			lv_city, 
+			lv_state, 
+			lv_zip, 
+			lv_gender, 
+			lv_topic_abs, 
+			lv_product, 
+			lv_age, 
+			lv_off_id_proof, 
+			lv_off_id
+		FROM :intab;
+	SELECT count(*)
+		INTO lv_count
+		FROM "EVENTSME"."EVENTSME.DBARTIFCT::EntityAndTypes.EventRegistration"
+		WHERE "user_id" = UPPER(lv_user_id)
+			OR "email" = LOWER(lv_email);
+	IF (lv_count > 0) THEN
+		ex_error = SELECT 500 AS http_status_code, 
+					'User ID or Email Already Exist: ' || UPPER(lv_user_id) AS error_message, 
+					'Please Choose different User ID or Email' AS detail
+				FROM dummy;
+	ELSEIF (lv_email is NULL
+OR lv_user_id is NULL
+OR lv_fname is NULL
+OR lv_lname is NULL
+OR lv_company is NULL
+OR lv_strno is NULL
+OR lv_street is NULL
+OR lv_city is NULL
+OR lv_state is NULL
+OR lv_product is NULL
+OR lv_off_id is NULL
+OR lv_off_id_proof is NULL) THEN
+		ex_error = SELECT 400 AS http_status_code, 
+					'Fill all the fields' AS error_message, 
+					'Complete all the entry' AS detail from dummy;
+ELSE
+		INSERT INTO "EVENTSME"."EVENTSME.DBARTIFCT::EntityAndTypes.EventRegistration"("user_id", "event_name", "first_name", "last_name", "email", "company", "street_no", "street", "city", "state", "postal_code", "gender", "topics_abstrat", "product_choose", "requested_on", "status", "official_id_proof", "official_id", "last_updated_on", "age") VALUES(UPPER(lv_user_id), lv_event_name, lv_fname, lv_lname, LOWER(lv_email), lv_company, lv_strno, lv_street, lv_city, lv_state, lv_zip, lv_gender, lv_topic_abs, lv_product, CURRENT_TIMESTAMP, 'Pending', lv_off_id_proof, lv_off_id, CURRENT_TIMESTAMP, lv_age);
+	END IF;
+END;

@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="CheckInOutReport" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="2.3" defaultClient="crossClient" visibility="internal" outputViewType="Projection" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
+<descriptions defaultDescription="CheckInOutReport"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="EVENTSME.DBARTIFCT::EntityAndTypes.UserCheckInOut" type="DATA_BASE_TABLE">
+    <viewAttributes allViewAttributes="true"/>
+    <columnObject schemaName="EVENTSME" columnObjectName="EVENTSME.DBARTIFCT::EntityAndTypes.UserCheckInOut"/>
+  </DataSource>
+  <DataSource id="EVENTSME.DBARTIFCT::EntityAndTypes.EventRegistration" type="DATA_BASE_TABLE">
+    <viewAttributes allViewAttributes="true"/>
+    <columnObject schemaName="EVENTSME" columnObjectName="EVENTSME.DBARTIFCT::EntityAndTypes.EventRegistration"/>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="CheckIn-Out">
+    <viewAttributes>
+      <viewAttribute id="action_perf"/>
+      <viewAttribute id="time_stamp"/>
+      <viewAttribute id="user_id"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="#EVENTSME.DBARTIFCT::EntityAndTypes.UserCheckInOut">
+      <mapping xsi:type="Calculation:AttributeMapping" target="action_perf" source="action_perf"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="time_stamp" source="time_stamp"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="user_id" source="user_id"/>
+    </input>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="MasterData">
+    <viewAttributes>
+      <viewAttribute id="age"/>
+      <viewAttribute id="city"/>
+      <viewAttribute id="company"/>
+      <viewAttribute id="email"/>
+      <viewAttribute id="event_name"/>
+      <viewAttribute id="first_name"/>
+      <viewAttribute id="gender"/>
+      <viewAttribute id="last_name"/>
+      <viewAttribute id="last_updated_on"/>
+      <viewAttribute id="official_id"/>
+      <viewAttribute id="official_id_proof"/>
+      <viewAttribute id="postal_code"/>
+      <viewAttribute id="product_choose"/>
+      <viewAttribute id="requested_on"/>
+      <viewAttribute id="state"/>
+      <viewAttribute id="status"/>
+      <viewAttribute id="street"/>
+      <viewAttribute id="street_no"/>
+      <viewAttribute id="topics_abstrat"/>
+      <viewAttribute id="user_id"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="#EVENTSME.DBARTIFCT::EntityAndTypes.EventRegistration">
+      <mapping xsi:type="Calculation:AttributeMapping" target="age" source="age"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="city" source="city"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="company" source="company"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="email" source="email"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="event_name" source="event_name"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="first_name" source="first_name"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="gender" source="gender"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="last_name" source="last_name"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="last_updated_on" source="last_updated_on"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="official_id" source="official_id"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="official_id_proof" source="official_id_proof"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="postal_code" source="postal_code"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="product_choose" source="product_choose"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="requested_on" source="requested_on"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="state" source="state"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="status" source="status"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="street" source="street"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="street_no" source="street_no"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="topics_abstrat" source="topics_abstrat"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="user_id" source="user_id"/>
+    </input>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Report" joinType="inner" cardinality="CN_1">
+    <viewAttributes>
+      <viewAttribute id="action_perf"/>
+      <viewAttribute id="time_stamp"/>
+      <viewAttribute id="user_id"/>
+      <viewAttribute id="age"/>
+      <viewAttribute id="city"/>
+      <viewAttribute id="company"/>
+      <viewAttribute id="email"/>
+      <viewAttribute id="event_name"/>
+      <viewAttribute id="first_name"/>
+      <viewAttribute id="gender"/>
+      <viewAttribute id="last_name"/>
+      <viewAttribute id="last_updated_on"/>
+      <viewAttribute id="official_id"/>
+      <viewAttribute id="official_id_proof"/>
+      <viewAttribute id="postal_code"/>
+      <viewAttribute id="product_choose"/>
+      <viewAttribute id="requested_on"/>
+      <viewAttribute id="state"/>
+      <viewAttribute id="status"/>
+      <viewAttribute id="street"/>
+      <viewAttribute id="street_no"/>
+      <viewAttribute id="topics_abstrat"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="#CheckIn-Out">
+      <mapping xsi:type="Calculation:AttributeMapping" target="action_perf" source="action_perf"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="time_stamp" source="time_stamp"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="user_id" source="user_id"/>
+    </input>
+    <input node="#MasterData">
+      <mapping xsi:type="Calculation:AttributeMapping" target="age" source="age"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="city" source="city"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="company" source="company"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="email" source="email"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="event_name" source="event_name"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="first_name" source="first_name"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="gender" source="gender"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="last_name" source="last_name"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="last_updated_on" source="last_updated_on"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="official_id" source="official_id"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="official_id_proof" source="official_id_proof"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="postal_code" source="postal_code"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="product_choose" source="product_choose"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="requested_on" source="requested_on"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="state" source="state"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="status" source="status"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="street" source="street"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="street_no" source="street_no"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="topics_abstrat" source="topics_abstrat"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="user_id" source="user_id"/>
+    </input>
+    <joinAttribute name="user_id"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Report">
+  <attributes>
+    <attribute id="action_perf" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="action_perf"/>
+      <keyMapping columnObjectName="Report" columnName="action_perf"/>
+    </attribute>
+    <attribute id="time_stamp" key="true" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="time_stamp"/>
+      <keyMapping columnObjectName="Report" columnName="time_stamp"/>
+    </attribute>
+    <attribute id="user_id" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="user_id"/>
+      <keyMapping columnObjectName="Report" columnName="user_id"/>
+    </attribute>
+    <attribute id="age" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="age"/>
+      <keyMapping columnObjectName="Report" columnName="age"/>
+    </attribute>
+    <attribute id="city" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="city"/>
+      <keyMapping columnObjectName="Report" columnName="city"/>
+    </attribute>
+    <attribute id="company" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="company"/>
+      <keyMapping columnObjectName="Report" columnName="company"/>
+    </attribute>
+    <attribute id="email" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="email"/>
+      <keyMapping columnObjectName="Report" columnName="email"/>
+    </attribute>
+    <attribute id="event_name" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="event_name"/>
+      <keyMapping columnObjectName="Report" columnName="event_name"/>
+    </attribute>
+    <attribute id="first_name" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="first_name"/>
+      <keyMapping columnObjectName="Report" columnName="first_name"/>
+    </attribute>
+    <attribute id="gender" order="10" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="gender"/>
+      <keyMapping columnObjectName="Report" columnName="gender"/>
+    </attribute>
+    <attribute id="last_name" order="11" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="last_name"/>
+      <keyMapping columnObjectName="Report" columnName="last_name"/>
+    </attribute>
+    <attribute id="last_updated_on" order="12" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="last_updated_on"/>
+      <keyMapping columnObjectName="Report" columnName="last_updated_on"/>
+    </attribute>
+    <attribute id="official_id" order="13" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="official_id"/>
+      <keyMapping columnObjectName="Report" columnName="official_id"/>
+    </attribute>
+    <attribute id="official_id_proof" order="14" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="official_id_proof"/>
+      <keyMapping columnObjectName="Report" columnName="official_id_proof"/>
+    </attribute>
+    <attribute id="postal_code" order="15" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="postal_code"/>
+      <keyMapping columnObjectName="Report" columnName="postal_code"/>
+    </attribute>
+    <attribute id="product_choose" order="16" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="product_choose"/>
+      <keyMapping columnObjectName="Report" columnName="product_choose"/>
+    </attribute>
+    <attribute id="requested_on" order="17" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="requested_on"/>
+      <keyMapping columnObjectName="Report" columnName="requested_on"/>
+    </attribute>
+    <attribute id="state" order="18" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="state"/>
+      <keyMapping columnObjectName="Report" columnName="state"/>
+    </attribute>
+    <attribute id="status" order="19" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="status"/>
+      <keyMapping columnObjectName="Report" columnName="status"/>
+    </attribute>
+    <attribute id="street" order="20" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="street"/>
+      <keyMapping columnObjectName="Report" columnName="street"/>
+    </attribute>
+    <attribute id="street_no" order="21" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="street_no"/>
+      <keyMapping columnObjectName="Report" columnName="street_no"/>
+    </attribute>
+    <attribute id="topics_abstrat" order="22" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="topics_abstrat"/>
+      <keyMapping columnObjectName="Report" columnName="topics_abstrat"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+    <shape expanded="true" modelObjectName="CheckIn-Out" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="76" y="252"/>
+      <rectangleSize height="30" width="140"/>
+    </shape>
+    <shape expanded="true" modelObjectName="MasterData" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="236" y="265"/>
+      <rectangleSize height="30" width="140"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Report" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="170" y="183"/>
+      <rectangleSize height="30" width="140"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

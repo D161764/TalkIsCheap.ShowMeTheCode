@@ -1,0 +1,27 @@
+PROCEDURE "EVENTSME"."EVENTSME.EventRegistration.Procedures::UpdateRegistration" (
+    IN user_id Nvarchar(20),
+    
+    OUT ex_error "EVENTSME.DBARTIFCT::EntityAndTypes.tt_exception"
+)
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER AS
+   --DEFAULT SCHEMA <default_schema_name>
+--   READS SQL DATA AS
+BEGIN
+declare lv_user_id Nvarchar(20);
+declare lv_status Nvarchar(10);
+
+select "user_id" , "status" into lv_user_id , lv_status from "EVENTSME"."EVENTSME.DBARTIFCT::EntityAndTypes.EventRegistration" where "user_id" = :user_id;
+
+IF (lv_status = 'Pending')
+
+Then 
+update "EVENTSME"."EVENTSME.DBARTIFCT::EntityAndTypes.EventRegistration" set "status" = 'Approved' , "last_updated_on" = CURRENT_TIMESTAMP
+where "user_id" = lv_user_id;
+
+ELSE
+ex_error = select 500 as http_status_code, 
+              'Already Approved or Status Cannot be Changed'  as error_message, 
+                     'Status cannot be changed ' as detail from dummy;
+END IF;
+END

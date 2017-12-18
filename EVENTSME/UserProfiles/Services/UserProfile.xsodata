@@ -1,0 +1,3 @@
+service {
+"_SYS_BIC"."EVENTSME.CalculationViews/UserProfiles" as "UserProfile" key ("user_id");
+}

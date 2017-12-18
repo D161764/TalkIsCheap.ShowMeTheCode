@@ -1,0 +1,70 @@
+namespace EVENTSME.DBARTIFCT;
+@Schema: 'EVENTSME' 
+context EntityAndTypes {
+   @Catalog.tableType: #COLUMN
+   Entity EventRegistration{
+       key user_id: String(20);
+       event_name: String(20);
+       first_name: String(50);
+       last_name: String(50);
+       email: String(50);
+       company: String(100);
+       street_no: String(20);
+       street : String(500);
+       city : String(50);
+       state: String(20);
+       postal_code: String(20);  
+       gender: String(10);
+       topics_abstrat : LargeString;
+       product_choose : String(50);
+       age : Integer;
+       requested_on : UTCTimestamp;
+       last_updated_on : UTCTimestamp;
+       status: String(10); 
+       official_id_proof: String(20);
+       official_id: String(20);
+       
+       
+   };
+   
+    @Catalog.tableType: #COLUMN
+   Entity UserCheckInOut{
+   key user_id: String(20);
+   key time_stamp : UTCTimestamp;
+   action_perf : String(20);
+   };
+    
+    Type tt_registration_event_user {
+       user_id: String(20);
+       event_name: String(20);
+       first_name: String(50);
+       last_name: String(50);
+       email: String(50);
+       company: String(100);
+       street_no: String(20);
+       street : String(500);
+       city : String(50);
+       state: String(20);
+       postal_code: String(20); 
+       gender: String(10);
+       topics_abstrat : LargeString;
+       product_choose : String(50);
+       age : Integer;
+       official_id_proof: String(20);
+       official_id: String(20);
+       
+    
+    };
+   
+    Type tt_exception {
+        HTTP_STATUS_CODE : Integer;
+        ERROR_MESSAGE : String(100);
+        DETAIL : String(100);
+      };
+      
+    Type tt_inout {
+    user_id: String(20);
+    action_perf : String(20);
+    };
+
+};

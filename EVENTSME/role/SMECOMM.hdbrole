@@ -1,0 +1,65 @@
+role EVENTSME.role::SMECOMM
+{
+system privilege: ADAPTER ADMIN;
+system privilege: AGENT ADMIN;
+system privilege: AUDIT ADMIN;
+system privilege: AUDIT OPERATOR;
+system privilege: BACKUP ADMIN;
+system privilege: BACKUP OPERATOR;
+system privilege: CATALOG READ;
+system privilege: CERTIFICATE ADMIN;
+system privilege: CREATE R SCRIPT;
+system privilege: CREATE REMOTE SOURCE;
+system privilege: CREATE SCENARIO;
+system privilege: CREATE SCHEMA;
+system privilege: CREATE STRUCTURED PRIVILEGE;
+system privilege: CREDENTIAL ADMIN;
+system privilege: DATA ADMIN;
+system privilege: EXPORT;
+system privilege: EXTENDED STORAGE ADMIN;
+system privilege: IMPORT;
+system privilege: INIFILE ADMIN;
+system privilege: LICENSE ADMIN;
+system privilege: LOG ADMIN;
+system privilege: MONITOR ADMIN;
+system privilege: OPTIMIZER ADMIN;
+system privilege: REPO.CONFIGURE;
+system privilege: REPO.EXPORT;
+system privilege: REPO.IMPORT;
+system privilege: REPO.MAINTAIN_DELIVERY_UNITS;
+system privilege: REPO.MODIFY_CHANGE;
+system privilege: REPO.MODIFY_FOREIGN_CONTRIBUTION;
+system privilege: REPO.MODIFY_OWN_CONTRIBUTION;
+system privilege: REPO.WORK_IN_FOREIGN_WORKSPACE;
+system privilege: RESOURCE ADMIN;
+system privilege: ROLE ADMIN;
+system privilege: SAVEPOINT ADMIN;
+system privilege: SCENARIO ADMIN;
+system privilege: SERVICE ADMIN;
+system privilege: SESSION ADMIN;
+system privilege: SSL ADMIN;
+system privilege: STRUCTUREDPRIVILEGE ADMIN;
+system privilege: TABLE ADMIN;
+system privilege: TENANT ADMIN;
+system privilege: TRACE ADMIN;
+system privilege: TRUST ADMIN;
+system privilege: USER ADMIN;
+system privilege: VERSION ADMIN;
+system privilege: WORKLOAD ADMIN;
+system privilege: WORKLOAD ANALYZE ADMIN;
+system privilege: WORKLOAD CAPTURE ADMIN;
+system privilege: WORKLOAD REPLAY ADMIN;
+
+catalog schema "EVENTSME": CREATE ANY, ALTER, DROP, EXECUTE, SELECT, INSERT, UPDATE, DELETE, INDEX, TRIGGER, DEBUG, REFERENCES;
+catalog schema "_SYS_BIC": EXECUTE, SELECT, CREATE ANY, ALTER, DROP;
+
+
+application privilege: "sap.bc.ina.service.v2::Execute";
+application privilege: "sap.hana.admin::Administrator";
+application privilege: "sap.hana.admin::Monitoring";
+application privilege: "sap.hana.admin.cockpit.app::AppSiteAccess:cockpit";
+application privilege: "sap.hana.admin.cockpit.app::WidgetAccess:monitoring";
+application privilege: "sap.hana.admin.cockpit.sysrep::WidgetAccess:sysrepadmin";
+application privilege: "sap.hana.backup::Admin";
+
+}

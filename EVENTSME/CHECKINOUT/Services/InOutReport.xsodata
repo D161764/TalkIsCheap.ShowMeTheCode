@@ -1,0 +1,5 @@
+service {
+
+"_SYS_BIC"."EVENTSME.CalculationViews/CheckInOutReport" as "ReporInOut" key ("time_stamp");
+
+}

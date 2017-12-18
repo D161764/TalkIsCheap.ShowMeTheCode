@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="UserProfiles" applyPrivilegeType="NONE" dataCategory="DEFAULT" dimensionType="STANDARD" schemaVersion="2.3" defaultClient="crossClient" visibility="internal" calculationScenarioType="SCRIPT_BASED" scriptParametersCaseSensitive="true" enforceSqlExecution="false">
+<descriptions defaultDescription="UserProfiles"/>
+<defaultSchema schemaName="_SYS_BIC"/>
+<localVariables/>
+<variableMappings/>
+<dataSources/>
+<calculationViews>
+  <calculationView xsi:type="Calculation:SqlScriptView" id="Script_View">
+    <viewAttributes>
+      <viewAttribute id="user_id" datatype="NVARCHAR" length="20"/>
+      <viewAttribute id="first_name" datatype="NVARCHAR" length="50"/>
+      <viewAttribute id="last_name" datatype="NVARCHAR" length="50"/>
+      <viewAttribute id="email" datatype="NVARCHAR" length="50"/>
+      <viewAttribute id="company" datatype="NVARCHAR" length="100"/>
+      <viewAttribute id="street_no" datatype="NVARCHAR" length="20"/>
+      <viewAttribute id="street" datatype="NVARCHAR" length="500"/>
+      <viewAttribute id="city" datatype="NVARCHAR" length="50"/>
+      <viewAttribute id="state" datatype="NVARCHAR" length="20"/>
+      <viewAttribute id="postal_code" datatype="NVARCHAR" length="20"/>
+      <viewAttribute id="gender" datatype="NVARCHAR" length="10"/>
+      <viewAttribute id="topics_abstrat" datatype="NCLOB"/>
+      <viewAttribute id="product_choose" datatype="NVARCHAR" length="50"/>
+      <viewAttribute id="official_id" datatype="NVARCHAR" length="20"/>
+      <viewAttribute id="official_id_proof" datatype="NVARCHAR" length="20"/>
+      <viewAttribute id="status" datatype="NVARCHAR" length="10"/>
+      <viewAttribute id="event_name" datatype="NVARCHAR" length="20"/>
+      <viewAttribute id="barcodeurl" datatype="NVARCHAR" length="500"/>
+      <viewAttribute id="age" datatype="INTEGER"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <definition>/********* Begin Procedure Script ************/ 
+BEGIN 
+   declare lv_gcapi Nvarchar(500);
+   lv_gcapi = 'https://chart.googleapis.com/chart?cht=qr&amp;chs=329x329&amp;chl=';
+     T1 = SELECT 
+	&quot;user_id&quot;,
+	&quot;first_name&quot;,
+	&quot;last_name&quot;,
+	&quot;email&quot;,
+	&quot;company&quot;,
+	&quot;street_no&quot;,
+	&quot;street&quot;,
+	&quot;city&quot;,
+	&quot;state&quot;,
+	&quot;postal_code&quot;,
+	&quot;gender&quot;,
+	&quot;topics_abstrat&quot;,
+	&quot;product_choose&quot;,
+	&quot;official_id&quot;,
+	&quot;official_id_proof&quot;,
+	&quot;status&quot;,
+	&quot;event_name&quot;,
+	
+	&quot;age&quot;
+	
+FROM &quot;EVENTSME&quot;.&quot;EVENTSME.DBARTIFCT::EntityAndTypes.EventRegistration&quot;;
+   var_out = SELECT 
+	&quot;user_id&quot;,
+	&quot;first_name&quot;,
+	&quot;last_name&quot;,
+	&quot;email&quot;,
+	&quot;company&quot;,
+	&quot;street_no&quot;,
+	&quot;street&quot;,
+	&quot;city&quot;,
+	&quot;state&quot;, 
+	&quot;postal_code&quot;,
+	&quot;gender&quot;,
+	&quot;topics_abstrat&quot;,
+	&quot;product_choose&quot;,
+	&quot;official_id&quot;, 
+	&quot;official_id_proof&quot;,
+	&quot;status&quot;,
+	&quot;event_name&quot;,
+	CONCAT(CAST(:lv_gcapi as Varchar),CAST(&quot;user_id&quot; as Varchar)) as &quot;barcodeurl&quot;,
+	&quot;age&quot;
+	
+FROM :T1;
+
+END /********* End Procedure Script ************/</definition>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Script_View">
+  <attributes>
+    <attribute id="user_id" key="true" order="1">
+      <descriptions defaultDescription="user_id"/>
+      <keyMapping columnObjectName="Script_View" columnName="user_id"/>
+    </attribute>
+    <attribute id="first_name" order="2">
+      <descriptions defaultDescription="first_name"/>
+      <keyMapping columnObjectName="Script_View" columnName="first_name"/>
+    </attribute>
+    <attribute id="last_name" order="3">
+      <descriptions defaultDescription="last_name"/>
+      <keyMapping columnObjectName="Script_View" columnName="last_name"/>
+    </attribute>
+    <attribute id="email" order="4">
+      <descriptions defaultDescription="email"/>
+      <keyMapping columnObjectName="Script_View" columnName="email"/>
+    </attribute>
+    <attribute id="company" order="5">
+      <descriptions defaultDescription="company"/>
+      <keyMapping columnObjectName="Script_View" columnName="company"/>
+    </attribute>
+    <attribute id="street_no" order="6">
+      <descriptions defaultDescription="street_no"/>
+      <keyMapping columnObjectName="Script_View" columnName="street_no"/>
+    </attribute>
+    <attribute id="street" order="7">
+      <descriptions defaultDescription="street"/>
+      <keyMapping columnObjectName="Script_View" columnName="street"/>
+    </attribute>
+    <attribute id="city" order="8">
+      <descriptions defaultDescription="city"/>
+      <keyMapping columnObjectName="Script_View" columnName="city"/>
+    </attribute>
+    <attribute id="state" order="9">
+      <descriptions defaultDescription="state"/>
+      <keyMapping columnObjectName="Script_View" columnName="state"/>
+    </attribute>
+    <attribute id="postal_code" order="10">
+      <descriptions defaultDescription="postal_code"/>
+      <keyMapping columnObjectName="Script_View" columnName="postal_code"/>
+    </attribute>
+    <attribute id="gender" order="11">
+      <descriptions defaultDescription="gender"/>
+      <keyMapping columnObjectName="Script_View" columnName="gender"/>
+    </attribute>
+    <attribute id="topics_abstrat" order="12">
+      <descriptions defaultDescription="topics_abstrat"/>
+      <keyMapping columnObjectName="Script_View" columnName="topics_abstrat"/>
+    </attribute>
+    <attribute id="product_choose" order="13">
+      <descriptions defaultDescription="product_choose"/>
+      <keyMapping columnObjectName="Script_View" columnName="product_choose"/>
+    </attribute>
+    <attribute id="official_id" order="14">
+      <descriptions defaultDescription="official_id"/>
+      <keyMapping columnObjectName="Script_View" columnName="official_id"/>
+    </attribute>
+    <attribute id="official_id_proof" order="15">
+      <descriptions defaultDescription="official_id_proof"/>
+      <keyMapping columnObjectName="Script_View" columnName="official_id_proof"/>
+    </attribute>
+    <attribute id="status" order="16">
+      <descriptions defaultDescription="status"/>
+      <keyMapping columnObjectName="Script_View" columnName="status"/>
+    </attribute>
+    <attribute id="event_name" order="17">
+      <keyMapping columnObjectName="Script_View" columnName="event_name"/>
+    </attribute>
+    <attribute id="barcodeurl" order="18">
+      <keyMapping columnObjectName="Script_View" columnName="barcodeurl"/>
+    </attribute>
+    <attribute id="age" order="19">
+      <keyMapping columnObjectName="Script_View" columnName="age"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

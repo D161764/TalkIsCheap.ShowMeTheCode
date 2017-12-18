@@ -1,0 +1,10 @@
+service {
+
+"EVENTSME"."EVENTSME.DBARTIFCT::EntityAndTypes.EventRegistration" as "RegList"
+
+create using 
+
+           "EVENTSME.EventRegistration.Procedures::InsertRegisterData";
+           
+}
+           
