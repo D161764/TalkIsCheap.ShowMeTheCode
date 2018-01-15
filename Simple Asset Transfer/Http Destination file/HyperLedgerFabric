@@ -1,0 +1,12 @@
+#
+#Mon Jan 15 18:49:30 UTC 2018
+Description=Hyper Ledger Fabric
+Type=HTTP
+Authentication=NoAuthentication
+Name=HyperLedgerFabric
+WebIDEEnabled=true
+CloudConnectorLocationId=SudipLaptop
+CloudConnectorVersion=2
+URL=https\://localhyper\:3000/api
+ProxyType=OnPremise
+WebIDESystem=HyperLedgerFabric

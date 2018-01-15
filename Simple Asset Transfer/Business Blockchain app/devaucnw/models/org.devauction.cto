@@ -1,0 +1,25 @@
+/**
+ * Write your model definitions here
+ */
+
+namespace org.devauction
+
+participant user identified by userid {
+  o String email
+  o String firstname
+  o String lastname
+  o String userid
+
+}
+
+asset comodity identified by assetId {
+  o String assetId
+  o String value
+  o String description
+  o String owner
+}
+
+transaction trade {
+  o String newuserid
+  --> comodity trcomodity 
+}
